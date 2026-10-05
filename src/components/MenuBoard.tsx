@@ -9,6 +9,8 @@ import type { DietaryFilter as DietaryFilterValue, MenuCategory } from "@/types/
 type MenuBoardProps = {
   categories: MenuCategory[];
   soldOutItemId: string | null;
+  /** Always keep this item in the list so the special callout stays in sync. */
+  pinnedItemId: string | null;
 };
 
 function itemMatchesFilter(
@@ -24,19 +26,25 @@ function itemMatchesFilter(
   return tags.includes("GF");
 }
 
-export function MenuBoard({ categories, soldOutItemId }: MenuBoardProps) {
+export function MenuBoard({
+  categories,
+  soldOutItemId,
+  pinnedItemId,
+}: MenuBoardProps) {
   const [filter, setFilter] = useState<DietaryFilterValue>("all");
 
   const visibleCategories = useMemo(() => {
     return categories
       .map((category) => ({
         ...category,
-        items: category.items.filter((item) =>
-          itemMatchesFilter(item.tags, filter),
+        items: category.items.filter(
+          (item) =>
+            itemMatchesFilter(item.tags, filter) ||
+            (pinnedItemId !== null && item.id === pinnedItemId),
         ),
       }))
       .filter((category) => category.items.length > 0);
-  }, [categories, filter]);
+  }, [categories, filter, pinnedItemId]);
 
   return (
     <>
@@ -44,7 +52,7 @@ export function MenuBoard({ categories, soldOutItemId }: MenuBoardProps) {
       {visibleCategories.length > 0 ? (
         <>
           <CategoryNav categories={visibleCategories} />
-          <main id="menu">
+          <main id="menu" className="scroll-mt-24 sm:scroll-mt-28">
             {visibleCategories.map((category) => (
               <MenuSection
                 key={category.id}
@@ -55,7 +63,7 @@ export function MenuBoard({ categories, soldOutItemId }: MenuBoardProps) {
           </main>
         </>
       ) : (
-        <main id="menu" className="px-5 py-10 sm:px-8">
+        <main id="menu" className="scroll-mt-24 px-5 py-10 sm:scroll-mt-28 sm:px-8">
           <p className="text-base text-ink-muted" role="status">
             No dishes match this filter. Try All, or switch dietary preference.
           </p>

@@ -31,7 +31,11 @@ export default async function Home({ searchParams }: HomeProps) {
         item={view.specialItem}
         soldOut={view.specialSoldOut}
       />
-      <MenuBoard categories={menu.categories} soldOutItemId={soldOutItemId} />
+      <MenuBoard
+        categories={menu.categories}
+        soldOutItemId={soldOutItemId}
+        pinnedItemId={menu.today_special.item_id}
+      />
       <Hours hours={menu.restaurant.hours} today={view.weekday} />
       <SiteFooter restaurant={menu.restaurant} />
     </div>

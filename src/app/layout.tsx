@@ -29,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${fraunces.variable} ${sourceSans.variable} bg-cream font-sans text-ink antialiased`}
+        suppressHydrationWarning
       >
         <a className="skip-link" href="#menu">
           Skip to menu
