@@ -42,11 +42,15 @@ Menu copy lives in `src/data/menu.json`. Hours and sold-out behaviour are derive
 - **Hard-coded Tuesday 11:30 / Monday**, not the visitor’s real clock. The brief allows this; it keeps the three states deterministic for review.
 - **Sticky nav as horizontal chips** on every breakpoint. A desktop sidebar would fight the single-column “menu card” layout.
 
+## Dietary filter
+
+Above the sticky section nav: **All** / **Vegetarian** / **Gluten-free**. Matching uses the item tags (`V`, `GF`). Empty categories are hidden while a filter is active.
+
 ## What I would build next
 
-- A dietary filter (vegetarian / gluten-free) once the core page is signed off
 - Real opening-hours from Europe/Lisbon if they ever want “open now” for customers, not reviewers
-- A print sheet already exists via `@media print`; I would test it on an actual café printer next
+- Test the `@media print` sheet on an actual café printer
+- Combine filters (e.g. vegetarian + gluten-free) if guests ask for both at once
 
 ## Loom talking points
 

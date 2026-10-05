@@ -1,8 +1,7 @@
-import { CategoryNav } from "@/components/CategoryNav";
 import { ClosedBanner } from "@/components/ClosedBanner";
 import { Hero } from "@/components/Hero";
 import { Hours } from "@/components/Hours";
-import { MenuSection } from "@/components/MenuSection";
+import { MenuBoard } from "@/components/MenuBoard";
 import { SiteFooter } from "@/components/SiteFooter";
 import { TodaysSpecial } from "@/components/TodaysSpecial";
 import { menu } from "@/data/menu";
@@ -32,16 +31,7 @@ export default async function Home({ searchParams }: HomeProps) {
         item={view.specialItem}
         soldOut={view.specialSoldOut}
       />
-      <CategoryNav categories={menu.categories} />
-      <main id="menu">
-        {menu.categories.map((category) => (
-          <MenuSection
-            key={category.id}
-            category={category}
-            soldOutItemId={soldOutItemId}
-          />
-        ))}
-      </main>
+      <MenuBoard categories={menu.categories} soldOutItemId={soldOutItemId} />
       <Hours hours={menu.restaurant.hours} today={view.weekday} />
       <SiteFooter restaurant={menu.restaurant} />
     </div>

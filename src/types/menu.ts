@@ -48,3 +48,6 @@ export type MenuData = {
 };
 
 export type PageState = "open" | "closed" | "special-sold-out";
+
+export type DietaryFilter = "all" | "vegetarian" | "gluten-free";
+
